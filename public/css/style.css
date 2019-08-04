@@ -1,0 +1,126 @@
+
+.fa{
+  padding-right: 3px;
+}
+.fa-white{
+  color: #ffffff;
+}
+.fa-black{
+  color: #5d5d5d;
+}
+.fa-green{
+  color: #048067 !important;
+}
+.bg-blue{
+  background-color: #82adff;
+}
+.bg-red{
+  background-color: #ff7171;
+}
+.bg-green{
+  background-color: #56ac5d;
+}
+.bg-yellow{
+  background-color: #ffc461;
+}
+.bg-gray{
+  background-color: #e8e8e8;
+}
+a:focus{
+  outline: none;
+}
+a.fa-white:hover,a.fa-white:focus{
+  color: white;
+  text-decoration: none;
+}
+a.fa-white:hover{
+  color: #eee;
+  /*text-shadow: 0 0 1px #fff;*/
+}
+
+/*Header*/
+header{
+  background: url("../images/wallhaven1.jpg") center/cover no-repeat;
+  height: 270px;
+}
+header>div{
+  background-color: rgba(0,0,0,0.5);
+}
+header .row1{
+  border-bottom: 1px solid #dbdbdb;
+}
+header .login,header .logout{
+   padding: 24px 0;
+   line-height: 24px;
+   margin: 0;
+}
+header .logInfo{
+  font-size: 16px;
+}
+
+header a:hover{
+  margin: 0;
+}
+header .hot-news{
+  margin: 10px auto;
+}
+header .hot-news li{
+  padding: 8px;
+  /*background: white;*/
+}
+header .creater{
+   padding: 64px 0;
+}
+
+
+.modal button.bg-green{
+  width: 100%;
+  font-size: 18px;
+}
+.modal button.bg-green:hover,.modal button.bg-green:focus{
+  color: white;
+  background-color: #56ac5d;
+  border-color: #adadad;
+}
+.modal-header{
+  padding: 10px;
+}
+.modal-dialog{
+  width: 370px;
+}
+.modal form .form-group{
+  position: relative;
+}
+.modal .remind{
+  position: absolute;
+  top: 7px;
+  right: 5px;
+  color: #a90000;
+  display: none;
+}
+
+nav{
+  background-color: white !important;
+  margin-bottom: 0 !important;
+}
+nav .nav{
+  position: relative;
+}
+nav .nav-line{
+  background-color: #048067;
+  position: absolute;
+  left: 0px;
+  width: 66px;
+  height: 2px;
+  bottom: 0;
+}
+
+
+#content{
+  background-color: #eeeeee;
+  padding: 20px;
+}
+#content .row{
+  margin: 0 !important;
+}
+#content

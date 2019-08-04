@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{%block content%}
+
+    <div class="container-fulid" id="content">
+        <div class="row">
+            {%for content in contents%}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="text-center">
+                        <h3 class="panel-title">{{content.title}}</h3>
+                        <ul class="list-unstyled list-inline">
+                            <li>作者：<span>{{content.user.username}}</span></li>
+                            <li>时间：<span>{{content.addTime|date('Y-m-d H:i:s',-8*60)}}</span></li>
+                            <li>阅读：<span>{{content.views}}</span></li>
+                            <li>评论：<span>{{content.comments.length}}</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        {{content.description}}
+                    </div>
+                    <div class="pull-right">
+                        <a href="view/?contentId={{content.id}}">阅读全文>></a>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+            {% include '../page.html' %}
+        </div>
+    </div>
+
+{%endblock%}
+
+
+
+

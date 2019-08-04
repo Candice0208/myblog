@@ -1,0 +1,91 @@
+{% extends 'layout.html' %}
+
+{%block main%}
+<ol class="breadcrumb">
+    <li><a href="/admin">管理首页</a></li>
+    <li><span>内容修改</span></li>
+</ol>
+<h3>内容修改 - {{content.title}}</h3>
+
+<form role="form">
+    <div class="form-group">
+        <label for="category">分类：</label>
+        <select name="category" id="category" class="form-control">
+            {% for category in categories%}
+                {%if category._id.toString()==content.category.toString()%}
+                    <option value="{{category.id}}" selected>{{category.name}}</option>
+                {%else%}
+                    <option value="{{category.id}}">{{category.name}}</option>
+                {%endif%}
+            {%endfor%}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="title">标题：</label>
+        <input type="text" value="{{content.title}}" class="form-control" id="title" placeholder="请输入内容标题" name="title">
+        <input type="hidden" id="contentId" value="{{content.id}}">
+    </div>
+    <div class="form-group">
+        <label for="description">简介：</label>
+        <textarea class="form-control" id="description" rows="5" placeholder="请输入内容简介" name="description">{{content.description}}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="content">内容：</label>
+        <!--<textarea class="form-control" id="content" rows="10" placeholder="请输入内容" name="content"></textarea>-->
+        <div id="content">
+            <p>{{content.content}}</p>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-default" id="contentBtn">提交</button>
+</form>
+
+<script type="text/javascript" src="/public/js/content.js"></script>
+<script type="text/javascript" src="/public/js/wangEditor.min.js"></script>
+<script type="text/javascript">
+    var E = window.wangEditor;
+    var editor = new E('#content');
+    // 或者 var editor = new E( document.getElementById('#editor') )
+    editor.create();
+
+    var html = escape2Html($('#content p').html());
+    editor.txt.clear();
+    editor.txt.html(html);
+
+    //转意符换成普通字符
+    function escape2Html(str) {
+        var arrEntities={'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"'};
+        return str.replace(/&(lt|gt|nbsp|amp|quot);/ig,function(all,t){return arrEntities[t];});
+    }
+
+    if($('code')){
+        var code = html2Escape($('code').html());
+        $('code').html(code);
+    }
+    //普通字符转换成转意符
+    function html2Escape(sHtml) {
+        return sHtml.replace(/[<>&"]/g,function(c){return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];});
+    }
+
+    //提交评论
+    $('#contentBtn').on('click',function () {
+        $.ajax({
+            type:'POST',
+            url:'/admin/content/edit',
+            data:{
+                contentId: $("#contentId").val(),
+                category: $("#category").val(),
+                title:$("#title").val(),
+                description:$("#description").val(),
+                content:$("#content .w-e-text").html(),
+            },
+            success:function (res) {
+                window.location.href = "http://localhost:8080/admin/content";
+                if(res.message){
+                    confirm(res.message);
+                }
+            }
+        })
+    });
+</script>
+
+{%endblock%}
